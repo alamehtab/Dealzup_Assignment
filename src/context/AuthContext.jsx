@@ -1,8 +1,9 @@
+// src/context/AuthContext.jsx
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../services/firebase';
 
-const AuthContext = createContext()
+const AuthContext = createContext();
 
 export function useAuth() {
     return useContext(AuthContext);
@@ -10,7 +11,11 @@ export function useAuth() {
 
 export function AuthProvider({ children }) {
     const [user, setUser] = useState(() => {
-        try { return JSON.parse(localStorage.getItem('user')) || null; } catch { return null; }
+        try {
+            return JSON.parse(localStorage.getItem('user')) || null;
+        } catch {
+            return null;
+        }
     });
     const [loading, setLoading] = useState(true);
 

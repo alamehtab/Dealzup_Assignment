@@ -1,7 +1,35 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../services/firebase";
+import { useAuth } from "../context/AuthContext";
 
 export default function Login() {
+    const navigate = useNavigate();
+    const { setUser } = useAuth();
+    const [form, setForm] = useState({ email: "", password: "" });
+    const [error, setError] = useState("");
+
+    const handleChange = (e) =>
+        setForm({ ...form, [e.target.name]: e.target.value });
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setError("");
+
+        try {
+            const userCredential = await signInWithEmailAndPassword(
+                auth,
+                form.email,
+                form.password
+            );
+            setUser(userCredential.user);
+            navigate("/"); // redirect to homepage
+        } catch (err) {
+            setError(err.message);
+        }
+    };
+
     return (
         <div className="flex justify-center items-center min-h-screen bg-gray-50 px-4">
             <div className="flex flex-col md:flex-row w-full max-w-4xl bg-white rounded-lg shadow-lg overflow-hidden">
@@ -12,66 +40,38 @@ export default function Login() {
                     </Link>
                     <h2 className="text-2xl font-bold mt-6 mb-6">Log In</h2>
 
-                    <form className="space-y-4">
+                    {error && <p className="text-red-600 mb-4">{error}</p>}
+
+                    <form className="space-y-4" onSubmit={handleSubmit}>
                         <input
                             type="email"
+                            name="email"
+                            value={form.email}
+                            onChange={handleChange}
                             placeholder="Enter Your Email Id"
                             className="w-full p-3 border rounded-md focus:outline-none"
+                            required
                         />
                         <input
                             type="password"
+                            name="password"
+                            value={form.password}
+                            onChange={handleChange}
                             placeholder="Enter Your Password"
                             className="w-full p-3 border rounded-md focus:outline-none"
+                            required
                         />
 
-                        <div className="flex justify-between items-center text-sm">
-                            <label className="flex items-center space-x-2">
-                                <input type="checkbox" />
-                                <span>Remember Me</span>
-                            </label>
-                            <Link to="#" className="text-blue-900 font-medium">
-                                Forgot Password?
-                            </Link>
-                        </div>
-
-                        <Link
-                            to="/"
-                            className="block w-full bg-blue-900 text-white py-3 rounded-md text-center font-medium hover:bg-blue-800 transition"
+                        <button
+                            type="submit"
+                            className="w-full bg-blue-900 text-white py-3 rounded-md hover:bg-blue-800 transition"
                         >
                             Log In
-                        </Link>
+                        </button>
                     </form>
 
-                    {/* Social Login */}
-                    <div className="mt-6 text-center">
-                        <p className="text-gray-600 text-sm">OR CONTINUE WITH</p>
-                        <div className="flex justify-center space-x-6 mt-4">
-                            <button>
-                                <img
-                                    src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"
-                                    alt="Apple Logo"
-                                    className="w-7 h-7 mb-1.5 cursor-pointer"
-                                />
-                            </button>
-                            <button>
-                                <img
-                                    src="https://cdn.simpleicons.org/facebook/1877F2"
-                                    alt="Facebook"
-                                    className="w-7 h-7 object-contain cursor-pointer"
-                                />
-                            </button>
-                            <button>
-                                <img
-                                    src="https://img.icons8.com/ios-filled/30/google-logo.png"
-                                    alt="google"
-                                    className="cursor-pointer"
-                                />
-                            </button>
-                        </div>
-                    </div>
-
-                    <p className="mt-6 text-sm text-gray-600">
-                        Doesn’t have an account?{" "}
+                    <p className="mt-4 text-sm text-gray-600">
+                        Don’t have an account?{" "}
                         <Link to="/signup" className="text-blue-900 font-medium">
                             Create One
                         </Link>
