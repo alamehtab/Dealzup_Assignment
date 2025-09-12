@@ -6,6 +6,7 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import PropertyDetails from './components/PropertyDetails'
 
 
 export default function App() {
@@ -18,6 +19,7 @@ export default function App() {
           <Route path="/listings" element={<Listings />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/property/:id" element={<PropertyDetails />} />
         </Routes>
       </main>
       <Footer />

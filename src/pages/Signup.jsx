@@ -1,43 +1,61 @@
-import React, { useState } from 'react'
-import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
-import { auth } from '../services/firebase'
-import { useNavigate } from 'react-router-dom'
-
+import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Signup() {
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [confirm, setConfirm] = useState('')
-    const [error, setError] = useState(null)
-    const nav = useNavigate()
-
-
-    async function handleSubmit(e) {
-        e.preventDefault()
-        if (password !== confirm) { setError('Passwords do not match'); return }
-        try {
-            const userCred = await createUserWithEmailAndPassword(auth, email, password)
-            await updateProfile(userCred.user, { displayName: name })
-            // redirect to login
-            nav('/login')
-        } catch (err) {
-            setError(err.message)
-        }
-    }
-
-
     return (
-        <div className="max-w-md mx-auto p-6">
-            <h2 className="text-xl font-bold mb-4">Signup</h2>
-            {error && <div className="text-red-600 mb-2">{error}</div>}
-            <form onSubmit={handleSubmit} className="space-y-3">
-                <input value={name} onChange={e => setName(e.target.value)} placeholder="Full name" className="w-full border rounded p-2" />
-                <input value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" className="w-full border rounded p-2" />
-                <input value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" type="password" className="w-full border rounded p-2" />
-                <input value={confirm} onChange={e => setConfirm(e.target.value)} placeholder="Confirm password" type="password" className="w-full border rounded p-2" />
-                <button className="w-full bg-green-600 text-white p-2 rounded">Create account</button>
-            </form>
+        <div className="flex justify-center items-center min-h-screen bg-gray-50">
+            <div className="flex w-[900px] bg-white rounded-lg shadow-lg overflow-hidden">
+                {/* Left Side - Signup Form */}
+                <div className="w-1/2 p-10">
+                    <Link to="/" className="text-sm text-gray-600 underline">
+                        ← Back to Homepage
+                    </Link>
+                    <h2 className="text-2xl font-bold mt-6 mb-6">Create new account</h2>
+
+                    <form className="space-y-4">
+                        <input
+                            type="text"
+                            placeholder="Enter Your Full Name"
+                            className="w-full p-3 border rounded-md focus:outline-none"
+                        />
+                        <input
+                            type="email"
+                            placeholder="Enter Your Email Id"
+                            className="w-full p-3 border rounded-md focus:outline-none"
+                        />
+                        <input
+                            type="password"
+                            placeholder="Enter Your Password"
+                            className="w-full p-3 border rounded-md focus:outline-none"
+                        />
+                        <input
+                            type="password"
+                            placeholder="Confirm Your Password"
+                            className="w-full p-3 border rounded-md focus:outline-none"
+                        />
+
+                        <button className="w-full bg-blue-900 text-white py-3 rounded-md hover:bg-blue-800">
+                            Create Account
+                        </button>
+                    </form>
+
+                    <p className="mt-4 text-sm text-gray-600">
+                        Already have an account?{" "}
+                        <Link to="/login" className="text-blue-900 font-medium">
+                            Log in
+                        </Link>
+                    </p>
+                </div>
+
+                {/* Right Side - Image */}
+                <div className="w-1/2">
+                    <img
+                        src="https://images.unsplash.com/photo-1600585154526-990dced4db0d"
+                        alt="property"
+                        className="w-full h-full object-cover"
+                    />
+                </div>
+            </div>
         </div>
-    )
+    );
 }

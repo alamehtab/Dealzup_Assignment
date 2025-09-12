@@ -1,0 +1,398 @@
+import React, { useEffect, useState, useRef } from "react";
+import { fetchProperties } from "../services/api";
+import Hero from "../components/Hero";
+import {
+  TrendingUp,
+  Home as HomeIcon,
+  Mic,
+  Shield,
+  MapPin,
+  Star,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import Newsletter from "../components/NewsLetter";
+import Footer from "../components/Footer";
+
+export default function Home() {
+  const [properties, setProperties] = useState([]);
+  const [error, setError] = useState(null);
+
+  const prevRef = useRef(null);
+  const nextRef = useRef(null);
+  const rentalPrevRef = useRef(null);
+  const rentalNextRef = useRef(null);
+
+  useEffect(() => {
+    fetchProperties()
+      .then((data) => setProperties(data))
+      .catch((err) => setError(err.message));
+  }, []);
+
+  return (
+    <div className="overflow-hidden">
+      {/* 1. Hero section */}
+      <Hero />
+
+      {/* 2. What We Do Section */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
+        <div className="text-center">
+          <h2 className="text-3xl font-bold text-blue-900 mb-2">What We Do?</h2>
+          <p className="text-gray-500 mb-12">
+            Helping you find, buy and rent properties with ease
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+            {[
+              {
+                icon: <TrendingUp className="text-blue-900 w-8 h-8" />,
+                title: "Buy & Sell Property",
+                text: "Explore verified properties to buy or sell with trust and ease.",
+              },
+              {
+                icon: <HomeIcon className="text-blue-900 w-8 h-8" />,
+                title: "Find Rental Homes",
+                text: "Find rental homes that fit your lifestyle and budget.",
+              },
+              {
+                icon: <Mic className="text-blue-900 w-8 h-8" />,
+                title: "Find AI property search",
+                text: "Hassle-free AI search for renting, buying, or selling property.",
+              },
+              {
+                icon: <Shield className="text-blue-900 w-8 h-8" />,
+                title: "Safe and secure transaction",
+                text: "Verified and secured listings!",
+              },
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="bg-gray-100 rounded-xl shadow-md p-6 flex flex-col items-center text-center"
+              >
+                <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mb-4">
+                  {item.icon}
+                </div>
+                <h3 className="font-semibold text-lg mb-2">{item.title}</h3>
+                <p className="text-gray-500 text-sm">{item.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 3. Featured Properties */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
+        <div className="flex items-center justify-between mb-6 flex-wrap gap-4">
+          <h2 className="text-2xl font-bold text-blue-900">Featured Properties</h2>
+          <button className="bg-white border border-blue-900 text-blue-900 rounded-full px-6 py-2 shadow hover:bg-blue-900 hover:text-white transition">
+            See all {properties.length} New Projects
+          </button>
+        </div>
+
+        {error && <div className="text-red-600">{error}</div>}
+
+        {properties.length >= 4 && (
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
+            <div className="md:col-span-6">
+              {properties[0] && (
+                <img
+                  src={properties[0].image}
+                  alt={properties[0].title}
+                  className="w-full h-[300px] md:h-[478px] object-cover rounded-xl"
+                />
+              )}
+            </div>
+
+            <div className="md:col-span-3">
+              {properties[1] && (
+                <img
+                  src={properties[1].image}
+                  alt={properties[1].title}
+                  className="w-full h-[300px] md:h-[478px] object-cover rounded-xl"
+                />
+              )}
+            </div>
+
+            <div className="md:col-span-3 flex flex-col gap-4">
+              {properties[6] && (
+                <img
+                  src={properties[6].image}
+                  alt={properties[6].title}
+                  className="w-full h-[140px] md:h-[226px] object-cover rounded-xl"
+                />
+              )}
+              {properties[8] && (
+                <img
+                  src={properties[8].image}
+                  alt={properties[8].title}
+                  className="w-full h-[140px] md:h-[226px] object-cover rounded-xl"
+                />
+              )}
+            </div>
+          </div>
+        )}
+      </section>
+
+      {/* 4.1 Best Property Section */}
+      <section className="max-w-7xl mx-auto bg-white rounded-xl px-4 sm:px-6 py-12">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-4">
+          <div>
+            <h2 className="text-3xl sm:text-4xl font-bold text-blue-900 mb-2">
+              Best Property Available For Sale
+            </h2>
+            <p className="text-gray-500">
+              Discover the finest handpicked properties that suit your lifestyle.
+            </p>
+          </div>
+          <button className="bg-blue-900 text-white px-6 py-2 rounded-lg shadow hover:bg-blue-800 transition">
+            Explore more properties
+          </button>
+        </div>
+
+        <div className="relative">
+          <Swiper
+            modules={[Navigation, Autoplay]}
+            autoplay={{ delay: 3000, disableOnInteraction: false }}
+            spaceBetween={20}
+            breakpoints={{
+              320: { slidesPerView: 1 },
+              640: { slidesPerView: 2 },
+              1024: { slidesPerView: 4 },
+            }}
+            loop={true}
+            navigation={{
+              prevEl: prevRef.current,
+              nextEl: nextRef.current,
+            }}
+            onBeforeInit={(swiper) => {
+              swiper.params.navigation.prevEl = prevRef.current;
+              swiper.params.navigation.nextEl = nextRef.current;
+            }}
+            className="pb-12"
+          >
+            {properties.slice(0, 20).map((p) => (
+              <SwiperSlide key={p.id}>
+                <div className="w-[341px] max-w-full h-[380px] bg-gray-100 rounded-xl shadow-md p-4 flex flex-col mx-auto">
+                  <img
+                    src={p.image}
+                    alt={p.title}
+                    className="w-full h-40 object-cover rounded-lg mb-4"
+                  />
+                  <div className="flex items-center justify-between text-sm text-gray-600 mb-2">
+                    <div className="flex items-center gap-1">
+                      <MapPin className="w-4 h-4 text-blue-700" />
+                      <span>{p.country || "New York"}</span>,{" "}
+                      <span>{p.state || "NY"}</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Star className="w-4 h-4 text-yellow-500" />
+                      <span>{p.rating ? `${p.rating}/5` : "4.5/5"}</span>
+                    </div>
+                  </div>
+                  <p className="text-black text-sm mb-3 line-clamp-3 leading-snug">
+                    {p.description ||
+                      "Beautiful modern property with spacious rooms and great location access."}
+                  </p>
+                  <div className="flex-grow" />
+                  <div className="flex items-center justify-between">
+                    <button className="bg-blue-900 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-800 transition">
+                      Buy Now
+                    </button>
+                    <span className="font-bold text-black text-lg">
+                      {p.price
+                        ? `$${Number(p.price).toLocaleString()}`
+                        : "$450,000"}
+                    </span>
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+          <button
+            ref={prevRef}
+            className="custom-nav hidden sm:flex items-center justify-center absolute left-0 top-1/2 -translate-y-1/2 z-20"
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+          <button
+            ref={nextRef}
+            className="custom-nav hidden sm:flex items-center justify-center absolute right-0 top-1/2 -translate-y-1/2 z-20"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
+        </div>
+      </section>
+
+      {/* 4.2 Rental Homes Section */}
+      <section className="max-w-7xl mx-auto bg-white rounded-xl px-4 sm:px-6 py-12">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-4">
+          <div>
+            <h2 className="text-3xl sm:text-4xl font-bold text-blue-900 mb-2">
+              Find The Perfect Rental Homes
+            </h2>
+            <p className="text-gray-500">
+              Browse our top rated properties for rent, featuring premium
+              listings tailored to your needs.
+            </p>
+          </div>
+          <button className="bg-blue-900 text-white px-6 py-2 rounded-lg shadow hover:bg-blue-800 transition">
+            View all rental homes
+          </button>
+        </div>
+
+        <div className="relative">
+          <Swiper
+            modules={[Navigation, Autoplay]}
+            autoplay={{ delay: 3000, disableOnInteraction: false }}
+            spaceBetween={20}
+            breakpoints={{
+              320: { slidesPerView: 1 },
+              640: { slidesPerView: 2 },
+              1024: { slidesPerView: 4 },
+            }}
+            loop={true}
+            navigation={{
+              prevEl: rentalPrevRef.current,
+              nextEl: rentalNextRef.current,
+            }}
+            onBeforeInit={(swiper) => {
+              swiper.params.navigation.prevEl = rentalPrevRef.current;
+              swiper.params.navigation.nextEl = rentalNextRef.current;
+            }}
+            className="pb-12"
+          >
+            {properties.slice(0, 20).map((p) => (
+              <SwiperSlide key={p.id}>
+                <div className="w-[341px] max-w-full h-[380px] bg-gray-100 rounded-xl shadow-md p-4 flex flex-col mx-auto">
+                  <img
+                    src={p.image}
+                    alt={p.title}
+                    className="w-full h-40 object-cover rounded-lg mb-4"
+                  />
+                  <div className="flex items-center justify-between text-sm text-gray-600 mb-2">
+                    <div className="flex items-center gap-1">
+                      <MapPin className="w-4 h-4 text-blue-700" />
+                      <span>{p.country || "New York"}</span>,{" "}
+                      <span>{p.state || "NY"}</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Star className="w-4 h-4 text-yellow-500" />
+                      <span>{p.rating ? `${p.rating}/5` : "4.5/5"}</span>
+                    </div>
+                  </div>
+                  <p className="text-black text-sm mb-3 line-clamp-3 leading-snug">
+                    {p.description ||
+                      "Spacious rental property with modern design and easy access to amenities."}
+                  </p>
+                  <div className="flex-grow" />
+                  <div className="flex items-center justify-between">
+                    <button className="bg-blue-900 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-800 transition">
+                      Rent Now
+                    </button>
+                    <span className="font-bold text-black text-lg">
+                      $1500/month
+                    </span>
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+          <button
+            ref={rentalPrevRef}
+            className="custom-nav hidden sm:flex items-center justify-center absolute left-0 top-1/2 -translate-y-1/2 z-20"
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+          <button
+            ref={rentalNextRef}
+            className="custom-nav hidden sm:flex items-center justify-center absolute right-0 top-1/2 -translate-y-1/2 z-20"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
+        </div>
+      </section>
+
+      {/*5. NewsLetter Section */}
+      <Newsletter />
+
+      {/*6. Latest Properties Section */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-16 grid lg:grid-cols-2 gap-20 items-center">
+        <div className="relative flex justify-center lg:justify-start">
+          {properties[26] && (
+            <img
+              src={properties[26].image}
+              alt={properties[26].title}
+              className="w-[510px] max-w-full h-[533px] object-cover rounded-xl border-[10px] border-white shadow-lg"
+            />
+          )}
+          {properties[49] && (
+            <img
+              src={properties[49].image}
+              alt={properties[49].title}
+              className="w-[408px] max-w-full h-[405px] object-cover rounded-xl border-[10px] border-white shadow-lg absolute top-[200px] left-[250px]"
+            />
+          )}
+        </div>
+        <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
+          <h2 className="text-4xl font-bold text-[#1e3a8a] mb-8">
+            We Provide Latest Properties For Our Valuable Clients
+          </h2>
+
+          <div className="space-y-6">
+            <div className="flex flex-col items-center lg:items-start text-center lg:text-left gap-2">
+              <TrendingUp className="w-6 h-6 text-[#1e3a8a]" />
+              <h3 className="text-xl font-semibold text-[#1e3a8a]">Budget Friendly</h3>
+              <p className="text-gray-500 max-w-[300px]">
+                Affordable properties that fit your budget without compromising on quality.
+              </p>
+            </div>
+            <div className="flex flex-col items-center lg:items-start text-center lg:text-left gap-2">
+              <Shield className="w-6 h-6 text-[#1e3a8a]" />
+              <h3 className="text-xl font-semibold text-[#1e3a8a]">Trusted By Thousand</h3>
+              <p className="text-gray-500 max-w-[300px]">
+                Thousands of satisfied clients trust our verified listings and services.
+              </p>
+            </div>
+            <div className="flex flex-col items-center lg:items-start text-center lg:text-left gap-2">
+              <MapPin className="w-6 h-6 text-[#1e3a8a]" />
+              <h3 className="text-xl font-semibold text-[#1e3a8a]">Prime Location</h3>
+              <p className="text-gray-500 max-w-[300px]">
+                Properties located in prime areas with easy access to all amenities.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 7. Footer Section */}
+      <Footer />
+
+      {/* Custom CSS */}
+      <style>{`
+        .custom-nav {
+          width: 44px;
+          height: 44px;
+          background: gray;
+          color: white;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+        .custom-nav:hover {
+          background: #1e3a8a;
+        }
+        .swiper-wrapper {
+          cursor: grab;
+        }
+      `}</style>
+    </div>
+  );
+}
