@@ -46,3 +46,19 @@ Used Firebase authentication for successful signups and redirect to login page o
 ---- Login Page ----
 Used Firebase authentication to check userAuth and login only with correct credentials.
 Stored user session with both React Context + localstorage and redirected user to home page only when the login succeeds
+
+# Screenshots of the project
+![Homepage Screenshot](./assets/HomePage1.png)
+![Homepage Screenshot](./assets/HomePage2.png)
+![Homepage Screenshot](./assets/WhatWeDo.png)
+![Homepage Screenshot](./assets/FeaturedProperty.png)
+![Homepage Screenshot](./assets/BestProperty.png)
+![Homepage Screenshot](./assets/FindRental.png)
+![Homepage Screenshot](./assets/NewsLetter.png)
+![Homepage Screenshot](./assets/PropertyDetails1.png)
+![Homepage Screenshot](./assets/PropertyDetails2.png)
+![Homepage Screenshot](./assets/PropertyList.png)
+![Homepage Screenshot](./assets/Pagination.png)
+![Homepage Screenshot](./assets/Signuppage.png)
+![Homepage Screenshot](./assets/LoginPage.png)
+![Homepage Screenshot](./assets/Footer.png)
