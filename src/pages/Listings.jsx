@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Paginator } from "primereact/paginator";
 import { MapPin, Star, Search } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function PropertyList() {
     const [properties, setProperties] = useState([]);
     const [first, setFirst] = useState(0);
     const [rows] = useState(10);
     const [search, setSearch] = useState("");
+    const navigate=useNavigate()
 
     useEffect(() => {
         fetch("https://68b826bcb715405043274639.mockapi.io/api/properties/PropertyListing")
@@ -80,7 +82,7 @@ export default function PropertyList() {
                                         ${property.price || "450000"}
                                     </span>
                                 </div>
-                                <button className="w-full mt-3 py-2 rounded-lg bg-[#1e3a8a] text-white hover:bg-blue-900 transition">
+                                <button onClick={()=>navigate(`/property/${property.id}`)} className="w-full mt-3 py-2 rounded-lg bg-[#1e3a8a] text-white hover:bg-blue-900 transition">
                                     Buy Now
                                 </button>
                             </div>
