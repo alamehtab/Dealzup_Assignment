@@ -173,7 +173,7 @@ export default function Home() {
                             640: { slidesPerView: 2 },
                             1024: { slidesPerView: 4 },
                         }}
-                        loop={true}
+                        loop={properties.length > 4}
                         navigation={{
                             prevEl: prevRef.current,
                             nextEl: nextRef.current,
@@ -269,7 +269,7 @@ export default function Home() {
                             640: { slidesPerView: 2 },
                             1024: { slidesPerView: 4 },
                         }}
-                        loop={true}
+                        loop={properties.length > 4}
                         navigation={{
                             prevEl: rentalPrevRef.current,
                             nextEl: rentalNextRef.current,
