@@ -31,24 +31,22 @@ export default function Login() {
     };
 
     return (
-        <div className="flex justify-center items-center min-h-screen bg-gray-50 px-4">
+        <div className="flex justify-center items-center min-h-screen bg-gray-50 px-2 sm:px-4">
             <div className="flex flex-col md:flex-row w-full max-w-4xl bg-white rounded-lg shadow-lg overflow-hidden">
-                <div className="w-full md:w-1/2 p-8 md:p-10">
+                <div className="w-full md:w-1/2 p-6 sm:p-8 md:p-10">
                     <Link to="/" className="text-sm text-gray-600 underline">
                         ← Back to Homepage
                     </Link>
-                    <h2 className="text-2xl font-bold mt-6 mb-6">Log In</h2>
-
+                    <h2 className="text-xl sm:text-2xl font-bold mt-4 mb-4 sm:mt-6 sm:mb-6">Log In</h2>
                     {error && <p className="text-red-600 mb-4">{error}</p>}
-
-                    <form className="space-y-4" onSubmit={handleSubmit}>
+                    <form className="space-y-3 sm:space-y-4" onSubmit={handleSubmit}>
                         <input
                             type="email"
                             name="email"
                             value={form.email}
                             onChange={handleChange}
                             placeholder="Enter Your Email Id"
-                            className="w-full p-3 border rounded-md focus:outline-none"
+                            className="w-full p-3 border rounded-md focus:outline-none text-base"
                             required
                         />
                         <input
@@ -57,18 +55,16 @@ export default function Login() {
                             value={form.password}
                             onChange={handleChange}
                             placeholder="Enter Your Password"
-                            className="w-full p-3 border rounded-md focus:outline-none"
+                            className="w-full p-3 border rounded-md focus:outline-none text-base"
                             required
                         />
-
                         <button
                             type="submit"
-                            className="w-full bg-blue-900 text-white py-3 rounded-md hover:bg-blue-800 transition"
+                            className="w-full bg-blue-900 text-white py-3 rounded-md hover:bg-blue-800 transition text-base"
                         >
                             Log In
                         </button>
                     </form>
-
                     <p className="mt-4 text-sm text-gray-600">
                         Don’t have an account?{" "}
                         <Link to="/signup" className="text-blue-900 font-medium">

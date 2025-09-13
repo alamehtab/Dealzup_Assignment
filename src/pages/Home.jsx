@@ -41,7 +41,7 @@ export default function Home() {
             <Hero />
 
             {/* 2. What We Do Section */}
-            <section className="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+            <section className="max-w-7xl mx-auto px-4 sm:px-6 py-10 mt-25">
                 <div className="text-center mb-10">
                     <h2 className="text-2xl sm:text-3xl font-bold text-blue-900 mb-2">
                         What We Do?
@@ -144,7 +144,7 @@ export default function Home() {
                 )}
             </section>
 
-            {/* 4. Sale Properties Swiper */}
+            {/* 4.1 Sale Properties Swiper */}
             <section className="max-w-7xl mx-auto bg-white rounded-xl px-4 sm:px-6 py-10">
                 <div className="flex flex-col sm:flex-row justify-between mb-8 gap-4">
                     <div>
@@ -240,7 +240,7 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* 4. Rental Homes Swiper */}
+            {/* 4.2 Rental Homes Swiper */}
             <section className="max-w-7xl mx-auto bg-white rounded-xl px-4 sm:px-6 py-10">
                 <div className="flex flex-col sm:flex-row justify-between mb-8 gap-4">
                     <div>

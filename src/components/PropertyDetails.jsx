@@ -40,66 +40,62 @@ export default function PropertyDetails() {
     }
 
     return (
-        <section className="px-6 py-10 max-w-6xl mx-auto">
+        <section className="px-2 sm:px-6 py-8 sm:py-10 max-w-6xl mx-auto">
             <div className="rounded-xl overflow-hidden shadow-lg">
                 <img
                     src={property.image}
                     alt={property.name}
-                    className="w-full h-[400px] object-cover"
+                    className="w-full h-48 sm:h-[400px] object-cover"
                 />
             </div>
-            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="mt-6 sm:mt-8 grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
                 <div>
-                    <h1 className="text-3xl font-bold text-gray-900 mb-3">
+                    <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2 sm:mb-3">
                         {property.name}
                     </h1>
-                    <p className="text-lg text-gray-700 mb-6">
+                    <p className="text-base sm:text-lg text-gray-700 mb-4 sm:mb-6">
                         Located at {property.buildingNumber} {property.cardinalDirection},{" "}
                         {property.city}, {property.state}, {property.country} ({property.countryCode})
                     </p>
-
-                    <div className="flex items-center gap-3 mb-4">
+                    <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-4">
                         <User className="text-blue-900" />
                         <span className="text-gray-800 font-medium">
                             Owner: {property.ownerName}
                         </span>
                     </div>
-
-                    <div className="flex items-center gap-3 mb-4">
+                    <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-4">
                         <Phone className="text-blue-900" />
                         <span className="text-gray-800 font-medium">
                             Contact: {property.contactNumber}
                         </span>
                     </div>
-
-                    <div className="flex items-center gap-3 mb-4">
+                    <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-4">
                         <MapPin className="text-blue-900" />
                         <span className="text-gray-800 font-medium">
                             Coordinates: {property.latitude}, {property.longitude}
                         </span>
                     </div>
-
-                    <p className="text-gray-600">
+                    <p className="text-gray-600 text-sm sm:text-base">
                         Time Zone: <span className="font-medium">{property.timeZone}</span>
                     </p>
                 </div>
-                <div className="bg-white rounded-xl shadow-md p-6 flex flex-col gap-4">
-                    <h2 className="text-xl font-semibold text-gray-900">
+                <div className="bg-white rounded-xl shadow-md p-4 sm:p-6 flex flex-col gap-3 sm:gap-4">
+                    <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
                         Quick Actions
                     </h2>
                     <Link
                         to="/listings"
-                        className="bg-blue-900 text-white rounded-lg px-6 py-3 text-center font-medium hover:bg-blue-800 transition"
+                        className="bg-blue-900 text-white rounded-lg px-4 sm:px-6 py-2 sm:py-3 text-center font-medium hover:bg-blue-800 transition"
                     >
                         Go to Listings
                     </Link>
                     <Link
                         to="/"
-                        className="bg-blue-900 text-white rounded-lg px-6 py-3 text-center font-medium hover:bg-blue-800 transition"
+                        className="bg-blue-900 text-white rounded-lg px-4 sm:px-6 py-2 sm:py-3 text-center font-medium hover:bg-blue-800 transition"
                     >
                         Back to Home
                     </Link>
-                    <button className="bg-green-600 text-white rounded-lg px-6 py-3 font-medium hover:bg-green-700 transition">
+                    <button className="bg-green-600 text-white rounded-lg px-4 sm:px-6 py-2 sm:py-3 font-medium hover:bg-green-700 transition">
                         Contact Owner
                     </button>
                 </div>
