@@ -9,8 +9,9 @@ export default function Navbar() {
     const { user, setUser } = useAuth();
     const location = useLocation();
     const [isOpen, setIsOpen] = useState(false);
-    const isAuthPage =
-        location.pathname === "/login" || location.pathname === "/signup";
+    const isAuthPage = location.pathname === "/login" || location.pathname === "/signup";
+    const isLoginPage = location.pathname === "/";
+
     const handleLogout = async () => {
         try {
             await signOut(auth);
@@ -41,7 +42,7 @@ export default function Navbar() {
                     <Link to="/contact">Contact Us</Link>
                 </div>
                 <div className="hidden md:flex">
-                    {user ? (
+                    {user && isLoginPage ? (
                         <div className="flex items-center space-x-3">
                             <span className="text-gray-700 text-sm">Hi, {user.email}</span>
                             <button
