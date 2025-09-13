@@ -26,6 +26,57 @@ cd Dealzup_Assignment
 npm install / npm i --- to install dependencies and node modules
 npm run dev --- to run production server
 
+# Firebase Setup
+1. Create a Firebase Project
+   Go to [Firebase Console](https://console.firebase.google.com/).
+   Click Add Project and give it a name (e.g., `my-app`).
+   Enable Google Analytics only if you need it.
+
+2. Register Your App
+   Inside your Firebase project, go to Project Overview → Add app.
+   Choose Web (`</>` icon).
+   Give your app a nickname and register it.
+
+3. Get Firebase Config
+   After registering, Firebase will show you a config object like this:
+
+     const firebaseConfig = {
+       apiKey: "YOUR_API_KEY",
+       authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+       projectId: "YOUR_PROJECT_ID",
+       storageBucket: "YOUR_PROJECT_ID.appspot.com",
+       messagingSenderId: "YOUR_SENDER_ID",
+       appId: "YOUR_APP_ID"
+     };
+
+4. Add Config to Project
+   Create a file:  
+   src/services/firebase.js
+   Paste your config:
+
+     import { initializeApp } from "firebase/app";
+     import { getAuth } from "firebase/auth";
+
+     const firebaseConfig = {
+       apiKey: "YOUR_API_KEY",
+       authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+       projectId: "YOUR_PROJECT_ID",
+       storageBucket: "YOUR_PROJECT_ID.appspot.com",
+       messagingSenderId: "YOUR_SENDER_ID",
+       appId: "YOUR_APP_ID"
+     };
+
+     const app = initializeApp(firebaseConfig);
+     export const auth = getAuth(app);
+
+5. Enable Authentication
+   In Firebase Console → Authentication → Get Started
+   Enable the providers you need (e.g., Email/Password).
+
+6. Run the App
+   npm install
+   npm start
+
 # Requirements and Steps Taken:
 ---- Home Page ----
 Created a home page with a navbar and hero section with banner on the top of the page.
