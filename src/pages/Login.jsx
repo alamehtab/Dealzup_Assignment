@@ -33,7 +33,6 @@ export default function Login() {
     return (
         <div className="flex justify-center items-center min-h-screen bg-gray-50 px-4">
             <div className="flex flex-col md:flex-row w-full max-w-4xl bg-white rounded-lg shadow-lg overflow-hidden">
-                {/* Left Side - Login Form */}
                 <div className="w-full md:w-1/2 p-8 md:p-10">
                     <Link to="/" className="text-sm text-gray-600 underline">
                         ← Back to Homepage
@@ -77,8 +76,6 @@ export default function Login() {
                         </Link>
                     </p>
                 </div>
-
-                {/* Right Side - Image */}
                 <div className="w-full md:w-1/2 hidden md:block">
                     <img
                         src="https://images.unsplash.com/photo-1600585154526-990dced4db0d"

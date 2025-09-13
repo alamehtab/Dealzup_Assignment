@@ -1,7 +1,6 @@
 import { ChevronDown } from 'lucide-react'
 import React from 'react'
 
-
 export default function Newsletter() {
     return (
         <section className="max-w-8xl mx-auto bg-white rounded-xl px-4 sm:px-6 py-10">

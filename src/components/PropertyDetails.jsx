@@ -41,7 +41,6 @@ export default function PropertyDetails() {
 
     return (
         <section className="px-6 py-10 max-w-6xl mx-auto">
-            {/* Image */}
             <div className="rounded-xl overflow-hidden shadow-lg">
                 <img
                     src={property.image}
@@ -49,10 +48,7 @@ export default function PropertyDetails() {
                     className="w-full h-[400px] object-cover"
                 />
             </div>
-
-            {/* Property Info */}
             <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
-                {/* Left Side */}
                 <div>
                     <h1 className="text-3xl font-bold text-gray-900 mb-3">
                         {property.name}
@@ -87,8 +83,6 @@ export default function PropertyDetails() {
                         Time Zone: <span className="font-medium">{property.timeZone}</span>
                     </p>
                 </div>
-
-                {/* Right Side Card */}
                 <div className="bg-white rounded-xl shadow-md p-6 flex flex-col gap-4">
                     <h2 className="text-xl font-semibold text-gray-900">
                         Quick Actions

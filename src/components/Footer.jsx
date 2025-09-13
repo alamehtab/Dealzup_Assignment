@@ -4,19 +4,13 @@ import React from "react";
 export default function Footer() {
     return (
         <footer className="w-full bg-[#5674c7] pt-20 mt-20 flex flex-col justify-between">
-            {/* Center Content */}
             <div className="flex flex-col items-center justify-center text-center py-16 px-6">
-                {/* Heading */}
                 <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
                     Get In Touch With Us
                 </h2>
-
-                {/* Subheading */}
                 <p className="text-base md:text-lg text-white mb-8 max-w-xl">
                     Subscribe now for exclusive property insights and deals!
                 </p>
-
-                {/* Input with Button */}
                 <div className="flex flex-col sm:flex-row items-center bg-gray-200 rounded-full w-full max-w-lg overflow-hidden">
                     <input
                         type="email"
@@ -28,24 +22,17 @@ export default function Footer() {
                     </button>
                 </div>
             </div>
-
-            {/* Bottom Footer Row */}
             <div className="w-full px-6 md:px-16 py-6 flex flex-col md:flex-row items-center justify-between gap-6 ">
-                {/* Left Side - Logo */}
                 <div className="flex items-center gap-2 text-white">
                     <HomeIcon className="w-6 h-6" />
                     <span className="font-semibold text-lg">PropBot</span>
                 </div>
-
-                {/* Middle Nav Links */}
                 <div className="flex flex-wrap gap-4 justify-center text-white text-sm">
                     <button className="hover:underline">For Sale</button>
                     <button className="hover:underline">Rental</button>
                     <button className="hover:underline">New Projects</button>
                     <button className="hover:underline">Property News</button>
                 </div>
-
-                {/* Right Side - Copyright */}
                 <div className="text-white text-sm text-center md:text-right">
                     ©2025 PropBot. All rights reserved.
                 </div>

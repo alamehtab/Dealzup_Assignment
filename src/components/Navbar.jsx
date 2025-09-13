@@ -1,4 +1,3 @@
-// src/components/Navbar.jsx
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Home as HomeIcon, Menu, X } from "lucide-react";
@@ -10,18 +9,14 @@ export default function Navbar() {
     const { user, setUser } = useAuth();
     const location = useLocation();
     const [isOpen, setIsOpen] = useState(false);
-
-    // Check if current page is login or signup
     const isAuthPage =
         location.pathname === "/login" || location.pathname === "/signup";
-
-    // Logout handler
     const handleLogout = async () => {
         try {
             await signOut(auth);
             setUser(null);
             localStorage.removeItem("user");
-            setIsOpen(false); // close mobile menu
+            setIsOpen(false);
         } catch (error) {
             console.error("Logout failed:", error);
         }
@@ -30,7 +25,6 @@ export default function Navbar() {
     return (
         <nav className="bg-white shadow-md sticky top-0 z-50">
             <div className="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
-                {/* Left Side - Logo */}
                 <Link
                     to="/"
                     className="flex items-center space-x-2 font-bold text-xl text-[#1e3a8a]"
@@ -38,8 +32,6 @@ export default function Navbar() {
                     <HomeIcon className="h-6 w-6 text-[#1e3a8a]" />
                     <span>PropBot</span>
                 </Link>
-
-                {/* Desktop Nav Links */}
                 <div className="hidden md:flex space-x-6 text-sm font-medium text-gray-600">
                     <Link to="/">Home</Link>
                     <Link to="/listings">Buy</Link>
@@ -48,8 +40,6 @@ export default function Navbar() {
                     <Link to="/about">About Us</Link>
                     <Link to="/contact">Contact Us</Link>
                 </div>
-
-                {/* Right Side - Auth Buttons */}
                 <div className="hidden md:flex">
                     {user ? (
                         <div className="flex items-center space-x-3">

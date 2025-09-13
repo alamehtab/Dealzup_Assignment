@@ -8,7 +8,7 @@ export default function PropertyList() {
     const [first, setFirst] = useState(0);
     const [rows] = useState(10);
     const [search, setSearch] = useState("");
-    const navigate=useNavigate()
+    const navigate = useNavigate()
 
     useEffect(() => {
         fetch("https://68b826bcb715405043274639.mockapi.io/api/properties/PropertyListing")
@@ -16,15 +16,11 @@ export default function PropertyList() {
             .then((data) => setProperties(data))
             .catch((err) => console.error("Error fetching properties:", err));
     }, []);
-
-    // Filter properties by country or state
     const filteredProperties = properties.filter(
         (property) =>
             property.country?.toLowerCase().includes(search.toLowerCase()) ||
             property.state?.toLowerCase().includes(search.toLowerCase())
     );
-
-    // Slice data for pagination (applies to filtered results)
     const currentPageData = filteredProperties.slice(first, first + rows);
 
     return (
@@ -32,8 +28,6 @@ export default function PropertyList() {
             <h2 className="text-3xl font-bold text-[#1e3a8a] mb-10 text-center">
                 Browse Properties
             </h2>
-
-            {/* Search Bar */}
             <div className="max-w-md mx-auto mb-10 relative">
                 <input
                     type="text"
@@ -41,14 +35,12 @@ export default function PropertyList() {
                     value={search}
                     onChange={(e) => {
                         setSearch(e.target.value);
-                        setFirst(0); // reset to first page when searching
+                        setFirst(0);
                     }}
                     className="w-full pl-25 pr-4 py-3 border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a8a]"
                 />
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
             </div>
-
-            {/* Grid Layout */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 {currentPageData.length > 0 ? (
                     currentPageData.map((property) => (
@@ -82,7 +74,7 @@ export default function PropertyList() {
                                         ${property.price || "450000"}
                                     </span>
                                 </div>
-                                <button onClick={()=>navigate(`/property/${property.id}`)} className="w-full mt-3 py-2 rounded-lg bg-[#1e3a8a] text-white hover:bg-blue-900 transition">
+                                <button onClick={() => navigate(`/property/${property.id}`)} className="w-full mt-3 py-2 rounded-lg bg-[#1e3a8a] text-white hover:bg-blue-900 transition">
                                     Buy Now
                                 </button>
                             </div>
