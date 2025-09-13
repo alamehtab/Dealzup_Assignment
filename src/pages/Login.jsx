@@ -24,7 +24,7 @@ export default function Login() {
                 form.password
             );
             setUser(userCredential.user);
-            navigate("/"); // redirect to homepage
+            navigate("/");
         } catch (err) {
             setError(err.message);
         }
